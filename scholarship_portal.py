@@ -11,7 +11,7 @@ Target Framework: Flet v0.86.5 (Python 3.12+)
 import re
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional, Tuple
+from typing import Optional
 import flet as ft
 
 
@@ -61,7 +61,7 @@ class ScholarshipValidator:
     # Compile Regular Expressions
     NAME_REGEX = re.compile(r"^[A-Za-z\s.\-',]{2,60}$")
     STUDENT_ID_REGEX = re.compile(r"^20\d{2}-\d{4,5}$")
-    CSPC_EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9_.+-]+@cspc\.edu\.ph$")
+    CSPC_EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9_.+-]+@my\.cspc\.edu\.ph$")
     PH_PHONE_REGEX = re.compile(r"^(?:\+63|0)9\d{9}$")
 
     @classmethod
@@ -76,12 +76,16 @@ class ScholarshipValidator:
         Returns: Sanitized clean name.
         Raises: ScholarshipValidationError if invalid.
         """
-        # TODO: Implement sanitization and pattern validation
         clean = cls.sanitize_string(value)
+
         if not clean:
             raise ScholarshipValidationError("Full name is required.")
-        if not cls.NAME_REGEX.match(clean):
-            raise ScholarshipValidationError("Enter a valid name (2–60 letters, hyphens, or periods).")
+
+        if not cls.NAME_REGEX.fullmatch(clean):
+            raise ScholarshipValidationError(
+                "Enter a valid name (2–60 letters, hyphens, or periods)."
+            )
+
         return clean
 
     @classmethod
@@ -91,8 +95,17 @@ class ScholarshipValidator:
         Returns: Normalized student ID.
         Raises: IDFormatError if invalid.
         """
-        # TODO: Implement ID validation using cls.STUDENT_ID_REGEX
-        pass
+        clean = cls.sanitize_string(value)
+
+        if not clean:
+            raise IDFormatError("Student ID is required.")
+
+        if not cls.STUDENT_ID_REGEX.fullmatch(clean):
+            raise IDFormatError(
+                "Student ID must follow the format YYYY-NNNN or YYYY-NNNNN."
+            )
+
+        return clean
 
     @classmethod
     def validate_email(cls, value: Optional[str]) -> str:
@@ -101,18 +114,46 @@ class ScholarshipValidator:
         Returns: Lowercased, sanitized email.
         Raises: EmailDomainError if invalid.
         """
-        # TODO: Implement email validation using cls.CSPC_EMAIL_REGEX
-        pass
+        clean = cls.sanitize_string(value).lower()
+
+        if not clean:
+            raise EmailDomainError("Institutional email is required.")
+
+        if not cls.CSPC_EMAIL_REGEX.fullmatch(clean):
+            raise EmailDomainError(
+                "Use a valid institutional email ending in @cspc.edu.ph."
+            )
+
+        return clean
 
     @classmethod
     def validate_phone(cls, value: Optional[str]) -> str:
         """
-        Validates and standardizes Philippine mobile numbers to 09XXXXXXXXX.
-        Returns: Normalized 11-digit phone string.
-        Raises: ScholarshipValidationError if invalid.
+        Validates and standardizes Philippine mobile numbers
+        to 09XXXXXXXXX.
         """
-        # TODO: Implement phone validation using cls.PH_PHONE_REGEX
-        pass
+
+        clean = cls.sanitize_string(value)
+
+        if not clean:
+            raise ScholarshipValidationError(
+                "Mobile number is required."
+            )
+
+        # Remove formatting characters
+        clean = clean.replace(" ", "").replace("-", "")
+
+        # Validate cleaned number
+        if not cls.PH_PHONE_REGEX.fullmatch(clean):
+            raise ScholarshipValidationError(
+                "Enter a valid Philippine mobile number."
+            )
+
+        # Convert +63XXXXXXXXXX to 09XXXXXXXXX
+        if clean.startswith("+63"):
+            clean = "0" + clean[3:]
+
+        return clean
 
     @classmethod
     def validate_gwa(cls, value: Optional[str]) -> float:
@@ -121,8 +162,20 @@ class ScholarshipValidator:
         Returns: Parsed float value.
         Raises: GWARangeError if out of bounds or non-numeric.
         """
-        # TODO: Implement defensive float parsing and range check
-        pass
+        clean = cls.sanitize_string(value)
+
+        if not clean:
+            raise GWARangeError("Academic GWA is required.")
+
+        try:
+            gwa_float = float(clean)
+        except (TypeError, ValueError):
+            raise GWARangeError("GWA must be a numeric value from 1.00 to 5.00.")
+
+        if not 1.00 <= gwa_float <= 5.00:   
+            raise GWARangeError("GWA must be between 1.00 and 5.00.")
+
+        return round(gwa_float, 2)
 
 
 # ============================================================================
@@ -145,35 +198,35 @@ def main(page: ft.Page):
         label="Full Name",
         hint_text="e.g., Maria Clara Santos",
         prefix_icon=ft.Icons.PERSON_OUTLINE,
-        border_radius=8
+        border_radius=8,
     )
 
     id_field = ft.TextField(
         label="Student ID Number",
         hint_text="e.g., 2024-0123",
         prefix_icon=ft.Icons.BADGE_OUTLINED,
-        border_radius=8
+        border_radius=8,
     )
 
     email_field = ft.TextField(
         label="Institutional Email",
         hint_text="e.g., mclara.santos@cspc.edu.ph",
         prefix_icon=ft.Icons.ALTERNATE_EMAIL,
-        border_radius=8
+        border_radius=8,
     )
 
     phone_field = ft.TextField(
         label="Philippine Mobile Number",
         hint_text="e.g., 09181234567 or +639181234567",
         prefix_icon=ft.Icons.PHONE_ANDROID_OUTLINED,
-        border_radius=8
+        border_radius=8,
     )
 
     gwa_field = ft.TextField(
         label="Academic General Weighted Average (GWA)",
         hint_text="Scale: 1.00 (highest) to 5.00 (passing/failing)",
         prefix_icon=ft.Icons.GRADE_OUTLINED,
-        border_radius=8
+        border_radius=8,
     )
 
     program_dropdown = ft.Dropdown(
@@ -186,13 +239,13 @@ def main(page: ft.Page):
             ft.dropdown.Option("DOST Science & Technology Scholarship"),
             ft.dropdown.Option("CSPC Institutional Academic Scholarship"),
             ft.dropdown.Option("UniFAST Tertiary Education Subsidy (TES)"),
-        ]
+        ],
     )
 
     status_summary = ft.Text(
         value="Ready to accept applications.",
         color=ft.Colors.GREY_400,
-        size=13
+        size=13,
     )
 
     # ------------------------------------------------------------------------
@@ -239,20 +292,33 @@ def main(page: ft.Page):
             has_errors = True
 
         # 2. Validate Student ID
-        # TODO: Wrap validate_student_id in try...except and set id_field.error
-        clean_id = None
+        try:
+            clean_id = ScholarshipValidator.validate_student_id(id_field.value)
+        except ScholarshipValidationError as err:
+            id_field.error = str(err)
+            has_errors = True
+        
 
         # 3. Validate Email
-        # TODO: Wrap validate_email in try...except and set email_field.error
-        clean_email = None
+        try:
+            clean_email = ScholarshipValidator.validate_email(email_field.value)
+        except ScholarshipValidationError as err:
+            email_field.error = str(err)
+            has_errors = True
 
         # 4. Validate Phone
-        # TODO: Wrap validate_phone in try...except and set phone_field.error
-        clean_phone = None
+        try:
+            clean_phone = ScholarshipValidator.validate_phone(phone_field.value)
+        except ScholarshipValidationError as err:
+            phone_field.error = str(err)
+            has_errors = True
 
         # 5. Validate GWA
-        # TODO: Wrap validate_gwa in try...except and set gwa_field.error
-        clean_gwa = None
+        try:
+            clean_gwa = ScholarshipValidator.validate_gwa(gwa_field.value)
+        except ScholarshipValidationError as err:
+            gwa_field.error = str(err)
+            has_errors = True
 
         # 6. Validate Program Selection
         if not program_dropdown.value:
@@ -275,7 +341,6 @@ def main(page: ft.Page):
         # TODO: Construct ScholarshipApplicant dataclass object
         # TODO: Append to approved_applicants list
         # TODO: Display green success SnackBar and reset form fields
-                # 7. All Validations Passed: Instantiate Domain Contract
         applicant = ScholarshipApplicant(
             full_name=clean_name,
             student_id=clean_id,
@@ -308,8 +373,7 @@ def main(page: ft.Page):
         email_field.value = ""
         phone_field.value = ""
         gwa_field.value = ""
-        program_dropdown.value = None
-
+        program_dropdown.value = None        
         page.update()
 
     # Layout Assembly
