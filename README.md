@@ -8,7 +8,7 @@
 
 | Role / Order | Full Name | Student ID Number |	Institutional Email |	Key Technical Contribution |
 | :---: | :--: | :---: | :-- | :--- |
-| **Member 1** |	Kelly Saldo |	2411287 |	kesaldo@my.cspc.edu.ph	| Regex, Domain Validator Engine, & Documentation |
+| **Member 1** |	Kelly Saldo |	2411287 |	kesaldo@my.cspc.edu.ph	| Domain Validator Engine, Defensive Pipeline, & Documentation|
 | **Member 2** |	Rizelyn Borbe |	[202X-XXXX] |	[email@cspc.edu.ph] |	[e.g., Flet UI Reactive Error States & Events] |
 | **Member 3** |	Tristan Bisenio |	[202X-XXXX] |	[email@cspc.edu.ph]	| [e.g., Dataclass Contracts & Automated Testing] |
 | **Member 4** |	Nash Sabas |	[202X-XXXX] |	[email@cspc.edu.ph]	| Regex & Domain Validator Engine |
