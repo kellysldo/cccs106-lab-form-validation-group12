@@ -49,12 +49,12 @@ OK
 **A. Multi-Field Validation Error State (Matching Figure 1)**
 
 _(Ensure red error borders, error descriptions, and red SnackBar are clearly visible)_
-![Validation Error Screenshot](error-state.png)
+![Validation Error Screenshot](screenshots/error-state.png)
 
 **B. Successful Application Registration State (Matching Figure 2)**
 
 _(Ensure clean form fields, green SnackBar, and the session contract card are clearly visible)_
-![Successful Registration Screenshot](success-state.png)
+![Successful Registration Screenshot](screenshots/success-state.png)
 
 ### 5. Technical Reflection & Engineering Audit
 - **Defensive Error Handling:** [In 1–2 sentences, explain how the team's code prevents GUI crashes when non-numeric or malformed GWA inputs are entered.]
