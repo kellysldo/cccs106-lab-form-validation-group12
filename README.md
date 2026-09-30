@@ -1,16 +1,16 @@
 # CCCS 106 - Group Laboratory Task Submission: Form Validation & Defensive Programming
 
 ### 1. Group & Team Members Roster
-- **Group Name / Number:** Qode Team / Group 12
+- **Group Name / Number:** I-git
 - **Year & Section:** BSCS 3A
-- **Date of Submission:** 2026-09-29
+- **Date of Submission:** 2026-09-30
 - **Submitting Member:** Kelly Saldo
 
 | Role / Order | Full Name | Student ID Number |	Institutional Email |	Key Technical Contribution |
 | :---: | :--: | :---: | :-- | :--- |
 | **Member 1** |	Kelly Saldo |	2411287 |	kesaldo@my.cspc.edu.ph	| Domain Validator Engine, Defensive Pipeline, & Documentation|
-| **Member 2** |	Rizelyn Borbe |	2410605 |	riborbe@my.cspc.edu.ph |	Flet UI Reactive Error States & Documentation] |
-| **Member 3** |	Tristan Bisenio |	232000006 |	trbisenio@my.cspc.edu.ph	| Defensive Pipeline & Automated Testing] |
+| **Member 2** |	Rizelyn Borbe |	2410605 |	riborbe@my.cspc.edu.ph |	Flet UI Reactive Error States & Documentation |
+| **Member 3** |	Tristan Bisenio |	232000006 |	trbisenio@my.cspc.edu.ph	| Defensive Pipeline & Automated Testing |
 | **Member 4** |	Nash Sabas |	2412117  |	sanash@my.cspc.edu.ph	| Regex & Domain Validator Engine |
 
 ### 2. Git Repository & Commit Verification
