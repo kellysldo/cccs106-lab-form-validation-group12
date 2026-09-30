@@ -23,7 +23,25 @@
 Run `python test_validation.py -v` in your terminal and paste the full output block below:
 
 ```cmd
-[Paste terminal test execution output here showing all 14 tests passing with "OK"]
+test_dataclass_contract_creation (__main__.TestScholarshipValidator.test_dataclass_contract_creation) ... ok
+test_gui_submission_flow (__main__.TestScholarshipValidator.test_gui_submission_flow) ... ok
+test_invalid_email_domain (__main__.TestScholarshipValidator.test_invalid_email_domain) ... ok
+test_invalid_gwa_non_numeric (__main__.TestScholarshipValidator.test_invalid_gwa_non_numeric) ... ok
+test_invalid_gwa_out_of_bounds (__main__.TestScholarshipValidator.test_invalid_gwa_out_of_bounds) ... ok
+test_invalid_name_empty (__main__.TestScholarshipValidator.test_invalid_name_empty) ... ok
+test_invalid_name_length_and_symbols (__main__.TestScholarshipValidator.test_invalid_name_length_and_symbols) ... ok
+test_invalid_phone_numbers (__main__.TestScholarshipValidator.test_invalid_phone_numbers) ... ok
+test_invalid_student_id_format (__main__.TestScholarshipValidator.test_invalid_student_id_format) ... ok
+test_valid_email (__main__.TestScholarshipValidator.test_valid_email) ... ok
+test_valid_gwa (__main__.TestScholarshipValidator.test_valid_gwa) ... ok
+test_valid_name (__main__.TestScholarshipValidator.test_valid_name) ... ok
+test_valid_phone_normalization (__main__.TestScholarshipValidator.test_valid_phone_normalization) ... ok
+test_valid_student_id (__main__.TestScholarshipValidator.test_valid_student_id) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.163s
+
+OK
 ```
 
 
@@ -31,12 +49,12 @@ Run `python test_validation.py -v` in your terminal and paste the full output bl
 **A. Multi-Field Validation Error State (Matching Figure 1)**
 
 _(Ensure red error borders, error descriptions, and red SnackBar are clearly visible)_
-![Validation Error Screenshot]([Upload or paste screenshot here])
+![Validation Error Screenshot](error-state.png)
 
 **B. Successful Application Registration State (Matching Figure 2)**
 
 _(Ensure clean form fields, green SnackBar, and the session contract card are clearly visible)_
-![Successful Registration Screenshot]([Upload or paste screenshot here])
+![Successful Registration Screenshot](success-state.png)
 
 ### 5. Technical Reflection & Engineering Audit
 - **Defensive Error Handling:** [In 1–2 sentences, explain how the team's code prevents GUI crashes when non-numeric or malformed GWA inputs are entered.]
