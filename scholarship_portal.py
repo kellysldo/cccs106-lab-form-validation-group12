@@ -61,11 +61,7 @@ class ScholarshipValidator:
     # Compile Regular Expressions
     NAME_REGEX = re.compile(r"^[A-Za-z\s.\-',]{2,60}$")
     STUDENT_ID_REGEX = re.compile(r"^20\d{2}-\d{4,5}$")
-<<<<<<< HEAD
     CSPC_EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9_.+-]+@cspc\.edu\.ph$")
-=======
-    CSPC_EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9_.+-]+@my\.cspc\.edu\.ph$")
->>>>>>> feature/bisenio
     PH_PHONE_REGEX = re.compile(r"^(?:\+63|0)9\d{9}$")
 
     @classmethod
@@ -133,19 +129,7 @@ class ScholarshipValidator:
     @classmethod
     def validate_phone(cls, value: Optional[str]) -> str:
         """
-<<<<<<< HEAD
         Validates and standardizes Philippine mobile numbers to 09XXXXXXXXX.
-        Returns: Normalized 11-digit phone string.
-        Raises: ScholarshipValidationError if invalid.
-        """
-        clean = cls.sanitize_string(value)
-
-        if not clean:
-            raise ScholarshipValidationError("Mobile number is required.")
-
-=======
-        Validates and standardizes Philippine mobile numbers
-        to 09XXXXXXXXX.
         """
 
         clean = cls.sanitize_string(value)
@@ -159,17 +143,12 @@ class ScholarshipValidator:
         clean = clean.replace(" ", "").replace("-", "")
 
         # Validate cleaned number
->>>>>>> feature/bisenio
         if not cls.PH_PHONE_REGEX.fullmatch(clean):
             raise ScholarshipValidationError(
                 "Enter a valid Philippine mobile number."
             )
 
-<<<<<<< HEAD
         # Normalize +639XXXXXXXXX to 09XXXXXXXXX.
-=======
-        # Convert +63XXXXXXXXXX to 09XXXXXXXXX
->>>>>>> feature/bisenio
         if clean.startswith("+63"):
             clean = "0" + clean[3:]
 
@@ -192,11 +171,7 @@ class ScholarshipValidator:
         except (TypeError, ValueError):
             raise GWARangeError("GWA must be a numeric value from 1.00 to 5.00.")
 
-<<<<<<< HEAD
-        if not 1.00 < gwa_float > 5.00:   
-=======
         if not 1.00 <= gwa_float <= 5.00:   
->>>>>>> feature/bisenio
             raise GWARangeError("GWA must be between 1.00 and 5.00.")
 
         return round(gwa_float, 2)
@@ -362,12 +337,6 @@ def main(page: ft.Page):
             return
 
         # 7. All Validations Passed: Instantiate Domain Contract
-        # TODO: Construct ScholarshipApplicant dataclass object
-        # TODO: Append to approved_applicants list
-        # TODO: Display green success SnackBar and reset form fields
-<<<<<<< HEAD
-
-=======
         applicant = ScholarshipApplicant(
             full_name=clean_name,
             student_id=clean_id,
@@ -401,7 +370,6 @@ def main(page: ft.Page):
         phone_field.value = ""
         gwa_field.value = ""
         program_dropdown.value = None        
->>>>>>> feature/bisenio
         page.update()
 
     # Layout Assembly
