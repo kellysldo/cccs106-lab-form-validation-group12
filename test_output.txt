@@ -1,0 +1,19 @@
+test_dataclass_contract_creation (__main__.TestScholarshipValidator.test_dataclass_contract_creation) ... ok
+test_gui_submission_flow (__main__.TestScholarshipValidator.test_gui_submission_flow) ... ok
+test_invalid_email_domain (__main__.TestScholarshipValidator.test_invalid_email_domain) ... ok
+test_invalid_gwa_non_numeric (__main__.TestScholarshipValidator.test_invalid_gwa_non_numeric) ... ok
+test_invalid_gwa_out_of_bounds (__main__.TestScholarshipValidator.test_invalid_gwa_out_of_bounds) ... ok
+test_invalid_name_empty (__main__.TestScholarshipValidator.test_invalid_name_empty) ... ok
+test_invalid_name_length_and_symbols (__main__.TestScholarshipValidator.test_invalid_name_length_and_symbols) ... ok
+test_invalid_phone_numbers (__main__.TestScholarshipValidator.test_invalid_phone_numbers) ... ok
+test_invalid_student_id_format (__main__.TestScholarshipValidator.test_invalid_student_id_format) ... ok
+test_valid_email (__main__.TestScholarshipValidator.test_valid_email) ... ok
+test_valid_gwa (__main__.TestScholarshipValidator.test_valid_gwa) ... ok
+test_valid_name (__main__.TestScholarshipValidator.test_valid_name) ... ok
+test_valid_phone_normalization (__main__.TestScholarshipValidator.test_valid_phone_normalization) ... ok
+test_valid_student_id (__main__.TestScholarshipValidator.test_valid_student_id) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.163s
+
+OK
