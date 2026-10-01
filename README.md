@@ -16,7 +16,7 @@
 ### 2. Git Repository & Commit Verification
 - **Dedicated GitHub Repository URL:** (https://github.com/kellysldo/cccs106-lab-form-validation-group12)
 - **Repository Visibility:** Public
-- **Final Verified Commit SHA on `main`:** [Paste 7-character or 40-character commit hash, e.g., a1b2c3d]
+- **Final Verified Commit SHA on `main`:** 5afb5b6
 
 ### 3. Automated Test Suite Output (`test_validation.py`)
 
