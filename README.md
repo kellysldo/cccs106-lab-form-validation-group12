@@ -60,6 +60,8 @@ _(Ensure clean form fields, green SnackBar, and the session contract card are cl
 ![Successful Registration Screenshot](screenshots/success-state.png)
 
 ### 5. Technical Reflection & Engineering Audit
-- **Defensive Error Handling:** [In 1–2 sentences, explain how the team's code prevents GUI crashes when non-numeric or malformed GWA inputs are entered.]
-- **Multi-Tier Separation:** [In 1–2 sentences, explain why client-side Flet error clearing alone does not replace domain-tier validation.]
-- **Team Collaboration Reflection:** [In 1–2 sentences, describe how your team coordinated branch merges, code reviews, or pairing to complete the validation pipeline.]
+- **Defensive Error Handling:** If someone types something that isn't a number in the GWA field, our validator catches the conversion error (TypeError or ValueError) and raises a GWARangeError with a clear message, so the app doesn't crash. The form then shows that message in red under the field, along with a red SnackBar, and the user can fix it and try again.
+
+- **Multi-Tier Separation:** The red error styling in Flet only changes what the user sees on screen. The real rules live in the validator, so wrong data still gets rejected even if someone skips the form or the UI changes. It also lets us test the rules without opening the app, which is what our 14 tests do.
+
+- **Team Collaboration Reflection:**  The team split the work by role and used separate feature branches (feature/scholarship-validation, feature/bisenio, and feature/Borbe), merging into main through pull requests. The process was not smooth. Tristan's branch was 9 commits behind and 2 ahead of main, so GitHub could not merge its pull request automatically --- he merged it directly into main instead. That merge was committed with unresolved conflict markers in scholarship_portal.py, which made the whole test suite fail with a SyntaxError until Kelly fixed it. Later, Rizelyn's push to feature/Borbe was rejected after a teammate had edited the same README sections. These problems taught the team to update their branch with the latest main and resolve conflicts there before opening a pull request, to check for leftover conflict markers before committing, and to rerun the 14 tests after every merge. The team should remember to assign each person their own files or README sections to avoid overlapping edits next time.
